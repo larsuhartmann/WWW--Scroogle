@@ -11,29 +11,18 @@ sub new
 {
      my $class = shift;
      my $options = shift;
-     my $self = {};
-     if (not ref $options eq "HASH") {
-          croak 'no options hash provided!';
-     }
-     if (not exists $ {$options}{url}) {
-          croak 'url expected!';
-     }
-     if (not exists $ {$options}{position}) {
-          croak 'position expected!';
-     }
-     if (not exists $ {$options}{searchstring}) {
-          croak 'searchstring expected!';
-     }
-     if (not exists $ {$options}{language}) {
-          croak 'language expected!';
-     }
+     if (not ref $options eq "HASH") { croak 'no options hash provided!'; }
+     if (not exists $ {$options}{url}) { croak 'url expected!'; }
+     if (not exists $ {$options}{position}) { croak 'position expected!'; }
+     if (not exists $ {$options}{searchstring}) { croak 'searchstring expected!'; }
+     if (not exists $ {$options}{language}) { croak 'language expected!'; }
 
-     bless $self, $class;
-
+     my $self;
      $self->{url} = $ {$options}{url};
      $self->{position} = $ {$options}{position};
      $self->{searchstring} = $ {$options}{searchstring};
      $self->{language} = $ {$options}{language};
+     bless $self, $class;
 
      return $self;
 }

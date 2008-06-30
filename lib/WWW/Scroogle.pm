@@ -47,15 +47,13 @@ sub _default_language { return ''; }
 
 sub language
 {
-     my $either = shift;
-     my $language;
-     if (ref $either) {
-          $language = $either->{language};
-     } else {
-          $language = $either->_default_language;
+     ref(my $either = shift)
+          or croak 'instance variable needed!';
+     if ($either->{language} eq '') {
+          return 'all';
+     }else {
+          return $either->{language};
      }
-     if ($language eq '') { $language = 'all'; }
-     return $language;
 }
 
 sub set_language
@@ -87,14 +85,12 @@ sub languages
                       );
      return @languages;
 }
+
 sub num_results
 {
-     my $either = shift;
-     if (ref $either) {
-          return $either->{num_results};
-     }else {
-          return $either->_default_num_results;
-     }
+     ref(my $self = shift)
+          or croak 'instance variable needed!';
+     return $self->{num_results};
 }
 
 sub set_num_results
@@ -104,13 +100,11 @@ sub set_num_results
      my $num_results = shift;
      if (not defined $num_results) {
           $self->{num_results} = $self->_default_num_results;
-     }else {
-          if ($num_results eq '') { croak 'nullstring given!'; }
-          if ($num_results =~ m/^\D+$/) { croak 'odd number expected!'; }
-          if ($num_results =~ tr/.//) { croak 'no floating point numbers allowed!'; }
-          if ($num_results < 1) { croak 'minimum is 1result!'; }
-          $self->{num_results} = $num_results;
+          return $self;
      }
+     if (not $num_results =~ m/^\d+$/) { croak 'odd number expected!'; }
+     if ($num_results < 1) { croak 'minimum is 1 result!'}
+     $self->{num_results} = $num_results;
      return $self;
 }
 
@@ -121,9 +115,9 @@ sub perform_search
      my $searchstring = $self->searchstring;
      my $language = $self->language;
      my $num_results = $self->num_results;
-     if (exists $self->{results}) { $self->{results} = undef }
+     if ($self->has_results) { $self->delete_results };
      my $agent = LWP::UserAgent->new;
-     my $request = HTTP::Request->new(POST=> 'http://www.scroogle.org/cgi-bin/nbbw.cgi');
+     my $request = HTTP::Request->new(POST => 'http://www.scroogle.org/cgi-bin/nbbw.cgi');
      $request->content_type('application/x-www-form-urlencodde');
      my $postdata;
      if ($language ne 'all') {
@@ -131,7 +125,6 @@ sub perform_search
      } else {
           $postdata = 'Gw='.$searchstring.'&n=100&z=';
      }
-
      my $niterate;
      if ($self->num_results < 100) {
           $niterate = 1;
@@ -145,7 +138,7 @@ sub perform_search
           my $result = $agent->request($request);
           for (split( '\n', $result->content)) {
                if ($results_left <= 0) { last; }
-               if (m{^(\d{1,5})\. <A Href="(.*)">(.*)</a>}) {
+               if (m/^(\d{1,5})\. <A Href="(.*)">/) {
                     $self->_add_result({
                                         position => $1,
                                         url => $2
@@ -179,16 +172,43 @@ sub nresults
 {
      ref (my $self = shift)
           or croak 'instance variable needed!';
-     my $num_results = @ {$self->{results}};
-     return $num_results;
+     if ($self->has_results) {
+          my $nresults = @ {$self->{results}};
+          return $nresults;
+     }
+     croak 'no results avaible';
+
 }
 
 sub get_results
 {
      ref (my $self = shift)
           or croak 'instane variable needed!';
-     if (not exists $self->{results}) { $self->perform_search; }
+     if (not $self->has_results) { $self->perform_search; }
      return @ {$self->{results}};
+}
+
+sub has_results
+{
+     ref (my $self = shift)
+          or croak 'instance variable needed!';
+     if (exists $self->{results}) {
+          1;
+     }else {
+          return;
+     }
+}
+
+sub delete_results
+{
+     ref (my $self = shift)
+          or croak 'instance variable needed!';
+     if ($self->has_results) {
+          delete $self->{results};
+          1;
+     }else {
+          return;
+     }
 }
 
 sub get_result
@@ -197,7 +217,8 @@ sub get_result
           or croak 'instance variable needed!';
      defined (my $requested_result = shift)
           or croak 'no value given';
-     return $self->{results}[$requested_result-1];
+     if (not $self->has_results) { croak 'no results avaible'; }
+     return $self->{results}[$requested_result -1];
 }
 
 sub position
@@ -206,7 +227,8 @@ sub position
           or croak 'instance variable needed!';
      defined (my $string = shift)
           or croak 'no string given!';
-     for (0..(@ {$self->{results}}-1)) {
+     if (not $self->has_results) { croak 'no results avaible'; }
+     for (0..(@ {$self->{results}} -1)) {
           my $result = $self->{results}->[$_];
           if ($result->url =~ /\Q$string\E/) {
                return $_+1;
@@ -214,7 +236,7 @@ sub position
      }
      return '';
 }
-return 1;;
+1;
 
 __END__
 

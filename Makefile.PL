@@ -8,6 +8,6 @@ WriteMakefile(
               PREREQ_PM         => {LWP => 5}, # e.g., Module::Name => 1.1
               ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
                (ABSTRACT_FROM   => 'lib/WWW/Scroogle.pm', # retrieve abstract from module
-                AUTHOR          => 'Lars Hartmann <lars <at> chaotika <dot> org>') : ()
+                AUTHOR          => 'Lars Hartmann <lars (at) chaotika (dot) org>') : ()
               ),
              );

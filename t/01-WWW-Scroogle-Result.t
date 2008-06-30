@@ -37,23 +37,23 @@ ok($@, 'WWW::Scroogle::Result->new({options-missing}) - fails (missing options)'
 # test the searchstring method
 can_ok('WWW::Scroogle::Result', 'searchstring');
 eval{$error = WWW::Scroogle::Result->searchstring};
-ok($@, 'WWW::Scroogle::Result->searchstring - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle::Result->searchstring - fails (instance variable needed)');
 is($result->searchstring,'foobar','$object->searchstring eq "foobar"');
 
 # test the language method
 can_ok('WWW::Scroogle::Result', 'language');
 eval {$error = WWW::Scroogle::Result->language};
-ok($@, 'WWW::Scroogle::Resukt->language - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle::Resukt->language - fails (instance variable needed)');
 is($result->language, 'all','$object->language eq "all"');
 
 # test the position method
 can_ok('WWW::Scroogle::Result', 'position');
 eval{$error = WWW::Scroogle::Result->position};
-ok($@, 'WWW::Scroogle::Result->position - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle::Result->position - fails (instance variable needed)');
 is($result->position,3,'$object->position == 3');
 
 # test the url method
 can_ok('WWW::Scroogle::Result', 'url');
 eval{$error = WWW::Scroogle::Result->url};
-ok($@, 'WWW::Scroogle::Result->url - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle::Result->url - fails (instance variable needed)');
 is($result->url,'foo.bar.org','$object->url eq "foo.bar.org"');

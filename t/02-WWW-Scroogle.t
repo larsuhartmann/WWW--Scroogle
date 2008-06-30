@@ -13,9 +13,9 @@ isa_ok($scroogle,'WWW::Scroogle');
 
 # testing (set_)searchstring
 my $searchstring = 'foobar';
-can_ok('WWW::Scroogle', $_) for(qw(searchstring set_searchstring));
+can_ok('WWW::Scroogle', $_) for qw(searchstring set_searchstring);
 eval{WWW::Scroogle->searchstring};
-ok($@, 'WWW::Scroogle->searchstring - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->searchstring - fails (instance variable needed)');
 eval{WWW::Scroogle->set_searchstring($searchstring)};
 ok($@, 'WWW::Scroogle->set_searchstring('.$searchstring.') - fails (instance variable needed)');
 eval{$scroogle->searchstring};
@@ -29,9 +29,9 @@ is($scroogle->searchstring,$searchstring,'$object->searchstring eq "'.$searchstr
 
 # testing (default_|set_)language
 my $language = 'de';
-can_ok('WWW::Scroogle', $_) for(qw(language set_language _default_language languages));
+can_ok('WWW::Scroogle', $_) for qw(language set_language _default_language languages);
 eval{WWW::Scroogle->language};
-ok($@, 'WWW::Scroogle->language - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->language - fails (instance variable needed)');
 eval{WWW::Scroogle->set_language};
 ok($@, 'WWW::Scroogle->set_language - fails (instance variable needed)');
 is($scroogle->_default_language, '', '$object->_default_language eq ""');
@@ -48,9 +48,9 @@ ok($scroogle->set_language('all'), '$object->set_language("all")');
 is($scroogle->language, 'all', '$object->language eq "all"');
 
 # testing (set_)num_results
-can_ok('WWW::Scroogle', $_) for(qw(num_results set_num_results));
+can_ok('WWW::Scroogle', $_) for qw(num_results set_num_results);
 eval {WWW::Scroogle->num_results};
-ok($@, 'WWW::Scroogle->num_results - fails (instance variable needed)');
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->num_results - fails (instance variable needed)');
 eval {WWW::Scroogle->set_num_results(100)};
 ok($@, 'WWW::Scroogle->set_num_results - fails (instance variable needed)');
 eval {$scroogle->set_num_results("")};
@@ -67,11 +67,40 @@ is($scroogle->num_results,230,'$object->num_results == 230');
 ok($scroogle->set_num_results(), '$object->set_num_results()');
 is($scroogle->num_results,100,'$object->num_results == 100');
 
-# perform_search
-can_ok('WWW::Scroogle', $_) for(qw(perform_search));
-eval {WWW::Scroogle->perform_search};
-ok($@,'WWW::Scroogle->perform-search - failed (instance variable needed)');
+# (n|has|delete|_add)(_)result(s)
+for (qw(_add_result delete_results has_results nresults)) {
+     can_ok('WWW::Scroogle', $_);
+     eval "WWW::Scroogle->$_";
+     ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->'.$_.' - failed (instance variable needed)');
+}
 my $error = WWW::Scroogle->new;
+ok(not($error->has_results), '$objectwithoutresults->has_results returns boolean false');
+ok(not($error->delete_results), '$objectwithoutresults->delete_results returns boolean false');
+eval {$error->nresults};
+ok($@, '$objectwithoutresults->nresults - failed (no results avaible)');
+eval {$scroogle->_add_result()};
+ok($@ =~ m/hash/, '$object->_add_result() - failed (no options hash given)');
+eval {$scroogle->_add_result({})};
+ok($@ =~ m/no url/, '$object->_add_result({}) - failed (no url given)');
+eval {$scroogle->_add_result({url=>'a.b.c',})};
+ok($@ =~ m/no position/, '$object->_add_result({url=>"a.b.c",})');
+ok($scroogle->_add_result({url=>'a.b.c',position=>'1'}), '$object->_add_results({valid_options})');
+ok($scroogle->has_results, '$object->has_results');
+is($scroogle->nresults, 1, '$object->nresults == 1');
+my $result = $scroogle->{results}->[0];
+isa_ok($result, 'WWW::Scroogle::Result');
+is($result->language, 'all', '$result->language eq "all"');
+is($result->position, 1, '$result->position == 1');
+is($result->searchstring, 'foobar', '$result->searchstring eq "foobar"');
+is($result->url, 'a.b.c', '$result->url eq "a.b.c"');
+ok($scroogle->delete_results, '$object->delete_results');
+ok(not($scroogle->has_results), '$object->has_results returns boolean false');
+
+# perform_search
+can_ok('WWW::Scroogle', $_) for qw(perform_search);
+eval {WWW::Scroogle->perform_search};
+ok($@ =~ m/instance variable needed/,'WWW::Scroogle->perform-search - failed (instance variable needed)');
+$error = WWW::Scroogle->new;
 eval {$error->perform_search};
-ok($@,'object-without-searchstring->perform_search - failed (no searchstring given)');
+ok($@ =~ m/searchstring/,'object-without-searchstring->perform_search - failed (no searchstring given)');
 ok($scroogle->perform_search, '$object->perform_search');
