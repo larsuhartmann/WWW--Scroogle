@@ -126,7 +126,7 @@ sub perform_search
           $postdata = 'Gw='.$searchstring.'&n=100&z=';
      }
      my $niterate;
-     if ($self->num_results < 100) {
+     if ($self->num_results <= 100) {
           $niterate = 1;
      }else {
           $niterate = ($num_results - $num_results%100)/100;
@@ -183,8 +183,8 @@ sub nresults
 sub get_results
 {
      ref (my $self = shift)
-          or croak 'instane variable needed!';
-     if (not $self->has_results) { $self->perform_search; }
+          or croak 'instance variable needed!';
+     if (not $self->has_results) { croak 'no results avaible' }
      return @ {$self->{results}};
 }
 
@@ -230,12 +230,32 @@ sub position
      if (not $self->has_results) { croak 'no results avaible'; }
      for (0..(@ {$self->{results}} -1)) {
           my $result = $self->{results}->[$_];
-          if ($result->url =~ /\Q$string\E/) {
+          if ($result->url =~ /$string/) {
                return $_+1;
           }
      }
-     return '';
+     return;
 }
+
+sub positions
+{
+     ref (my $self = shift)
+          or croak 'instance variable needed!';
+     defined (my $string = shift)
+          or croak 'no string given!';
+     if (not $self->has_results) { croak 'no results avaible'; }
+     my @return;
+     for (0..(@ {$self->{results}} -1)) {
+          my $result = $self->{results}->[$_];
+          if ($result->url =~ /$string/) {
+               push @return, $_+1;
+          }
+     }
+     # no matches found
+     if (scalar(@return) == 0) { return; }
+     return @return;
+}
+
 1;
 
 __END__
@@ -265,7 +285,7 @@ WWW::Scroogle - Perl Extension for Scrooge
    
    # iterate over all results
    for (@results){
-       print $_->string."\n";
+       print $_->url."\n";
    }
 
 =head1 DESCRIPTION
@@ -325,11 +345,11 @@ returns list of results matching $string|$regexp
 
 returns the corresponding result objects
 
-=head2 $position = $scroogle->position_of($string|$regexp)
+=head2 $position = $scroogle->position($string|$regexp)
 
 returns the position of the first result matching $string|$regexp
 
-=head2 @positions = $scroogle->positions_of($string|$regexp)
+=head2 @positions = $scroogle->positions($string|$regexp)
 
 returns a list of the positions of all matching results.
 
