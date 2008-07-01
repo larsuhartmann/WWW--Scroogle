@@ -218,7 +218,7 @@ sub get_result
      defined (my $requested_result = shift)
           or croak 'no value given';
      if (not $self->has_results) { croak 'no results avaible'; }
-     return $self->{results}[$requested_result -1];
+     return $self->{results}[$requested_result - 1];
 }
 
 sub position
@@ -228,10 +228,10 @@ sub position
      defined (my $string = shift)
           or croak 'no string given!';
      if (not $self->has_results) { croak 'no results avaible'; }
-     for (0..(@ {$self->{results}} -1)) {
+     for (0..(@ {$self->{results}} - 1)) {
           my $result = $self->{results}->[$_];
           if ($result->url =~ /$string/) {
-               return $_+1;
+               return $_ + 1;
           }
      }
      return;
@@ -245,10 +245,10 @@ sub positions
           or croak 'no string given!';
      if (not $self->has_results) { croak 'no results avaible'; }
      my @return;
-     for (0..(@ {$self->{results}} -1)) {
+     for (0..(@ {$self->{results}} - 1)) {
           my $result = $self->{results}->[$_];
           if ($result->url =~ /$string/) {
-               push @return, $_+1;
+               push @return, $_ + 1;
           }
      }
      # no matches found
