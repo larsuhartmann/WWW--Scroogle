@@ -290,7 +290,7 @@ WWW::Scroogle - Perl Extension for Scroogle
    # get search_results
    my $results = $scroogle->get_results;
    
-   # print rank of website 'bar'
+   # print rank of the first website whose url matches 'wikipedia'
    print $results->position(qr{wikipedia}).'\n';
    
    # get all results

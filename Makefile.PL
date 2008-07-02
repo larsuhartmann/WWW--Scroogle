@@ -5,7 +5,7 @@ use ExtUtils::MakeMaker;
 WriteMakefile(
               NAME              => 'WWW::Scroogle',
               VERSION_FROM      => 'lib/WWW/Scroogle.pm', # finds $VERSION
-              PREREQ_PM         => {LWP => 5}, # e.g., Module::Name => 1.1
+              PREREQ_PM         => {LWP => 5.808}, # e.g., Module::Name => 1.1
               ($] >= 5.005 ?     ## Add these new keywords supported since 5.005
                (ABSTRACT_FROM   => 'lib/WWW/Scroogle.pm', # retrieve abstract from module
                 AUTHOR          => 'Lars Hartmann <lars (at) chaotika (dot) org>') : ()

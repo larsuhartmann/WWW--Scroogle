@@ -1,5 +1,14 @@
 2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
-	Version 0.012
+	Version 0.013 Released
+	
+	* NEW: Updated to 0.013
+
+	* lib/WWW/Scroogle.pm (POD): solved another obscurity - thanks moritz
+
+	* Makefile.PL: changed LWP Depend from version 5 to 5.808 as <5.08 gives strange warnings - again thanks tinita and moritz
+
+2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
+	Version 0.012 Released
 	
 	* NEW: Updated to 0.012
 
