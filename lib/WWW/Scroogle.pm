@@ -8,7 +8,7 @@ use Carp;
 require LWP;
 require WWW::Scroogle::Result;
 
-our $VERSION = '0.011';
+our $VERSION = '0.012';
 
 sub new
 {
@@ -275,7 +275,7 @@ __END__
 
 =head1 NAME
 
-WWW::Scroogle - Perl Extension for Scrooge
+WWW::Scroogle - Perl Extension for Scroogle
 
 =head1 SYNOPSIS
 
@@ -291,7 +291,7 @@ WWW::Scroogle - Perl Extension for Scrooge
    my $results = $scroogle->get_results;
    
    # print rank of website 'bar'
-   print $results->position('bar').'\n';
+   print $results->position(qr{wikipedia}).'\n';
    
    # get all results
    my @results = $results->get_results;

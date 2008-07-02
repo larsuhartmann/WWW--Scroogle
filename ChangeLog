@@ -1,4 +1,11 @@
 2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
+	Version 0.012
+	
+	* NEW: Updated to 0.012
+
+	* lib/WWW/Scroogle.pm (POD): fixed another Typo and another obscuritie - again thanks to moritz
+
+2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
 	Version 0.011 Released.
 
 	* NEWS: Updated to 0.011
