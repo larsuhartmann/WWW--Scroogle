@@ -137,6 +137,19 @@ ok($result = $scroogle->get_result(1), 'my $result = $object->get_result(1)');
 isa_ok($result, 'WWW::Scroogle::Result');
 is($result->position, 1, '$result->position == 1');
 
+# get_results_matching
+can_ok('WWW::Scroogle', $_) for qw(get_results_matching);
+eval {WWW::Scroogle->get_results_matching};
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->get_result - failed (instance variable needed)');
+eval {$scroogle->get_results_matching};
+ok($@ =~ m/string/, '$object->positions - failed (no string given)');
+eval {$error->get_results_matching("foobar")};
+ok($@ =~ m/result/, '$objectwithoutresults->get_results_matching("foobar") - failed (no results avaible)');
+ok(not($scroogle->get_results_matching("asdfghjkl")), '$object->get_results_matching("asdfghjkl") - returns boolean false (found nothing)');
+ok(@results = $scroogle->get_results_matching("foo"), 'my @results = $object->get_results_matching("foo")');
+ok(scalar(@results) >= 1, 'scalar(@results ) >= 1');
+isa_ok($results[0], 'WWW::Scroogle::Result');
+
 # position(s)
 can_ok('WWW::Scroogle', $_) for qw(position positions);
 eval {WWW::Scroogle->position};

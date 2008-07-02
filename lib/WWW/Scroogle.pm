@@ -244,18 +244,31 @@ sub positions
      defined (my $string = shift)
           or croak 'no string given!';
      if (not $self->has_results) { croak 'no results avaible'; }
+     my @results = $self->get_results_matching($string);
      my @return;
-     for (0..(@ {$self->{results}} - 1)) {
-          my $result = $self->{results}->[$_];
-          if ($result->url =~ /$string/) {
-               push @return, $_ + 1;
-          }
+     for (@results) {
+          push @return, $_->position;
      }
-     # no matches found
-     if (scalar(@return) == 0) { return; }
+     if (scalar(@return) == 0) { return; }              # no matches found
      return @return;
 }
 
+sub get_results_matching
+{
+     ref (my $self = shift)
+          or croak 'instance variable needed!';
+     defined (my $string = shift)
+          or croak 'no string given!';
+     if (not $self->has_results) { croak 'no results avaible'; }
+     my @return;
+     for (@ {$self->{results}}) {
+          if ($_->url =~ /$string/) {
+               push @return, $_;
+          }
+     }
+     if (scalar(@return) == 0) { return; }              # no matches found
+     return @return;
+}
 1;
 
 __END__
@@ -333,17 +346,29 @@ sets the number of results
 
 performs search and stores result. expects that a searchstring was set.
 
-=head2 @results = $scroogle->get_results
+=head2 $scroogle->nresults
 
-returns list of WWW::Scroogle::Result objects.
+returns number of results or false if no results are avaible
 
-=head2 @results = $scroogle->get_results_mach($regexp|$string)
+=head2 $scroogle->has_results
+
+returns true if there are stored results and false if there are no results avaible
+
+=head2 $scroogle->delete_results
+
+deletes all saved results
+
+=head2 @results = $scroogle->get_results(@list_of_positions)
+
+returns list of WWW::Scroogle::Result objects. or a list of all wanted results if list was provided
+
+=head2 @results = $scroogle->get_results_matching($regexp|$string)
 
 returns list of results matching $string|$regexp
 
-=head2 $result = $scroogle->get_result_pos(every,position,wanted)
+=head2 $result = $scroogle->get_result($position)
 
-returns the corresponding result objects
+returns the requested result
 
 =head2 $position = $scroogle->position($string|$regexp)
 

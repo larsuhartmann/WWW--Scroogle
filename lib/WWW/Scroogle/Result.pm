@@ -24,7 +24,7 @@ sub new
      $self->{language} = $ {$options}{language};
      bless $self, $class;
 
-     return $self;
+     return $self
 }
 
 sub searchstring
@@ -55,3 +55,58 @@ sub url
      return $self->{url};
 }
 1;
+
+__END__
+
+=head1 NAME
+
+WWW::Scroogle::Result - A Subclass for Search Results from WWW::Scroogle
+
+=head1 SYNOPSIS
+
+   my @results = $scroogle->get_results;
+
+   print $_->position, ' ', $_->url, "\n" for @results;
+
+=head1 DESCRIPTION
+
+WWW::Scroogle::Result provides a object layer for search results from WWW::Scroogle
+
+=head1 METHODS
+
+=head2 WWW::Scroogle::Result->new(\%options)
+
+Returns a new WWW::Scroogle::Result object from the given options
+the required options are:
+
+=over
+
+=item * url
+
+=item * position
+
+=item * searchstring
+
+=item * language
+
+=back
+
+croaks if errors occur
+
+=head2 $result->url
+
+returns the url of the result
+
+=head2 $result->position
+
+returns the position of the result
+
+=head2 $result->searchstring
+
+returns the searchstring used in WWW::Scroogle while performing the search
+
+=head2 $result->language
+
+returns the language used in WWW::Scroogle while performing the search
+
+=cut
