@@ -8,7 +8,7 @@ use Carp;
 require LWP;
 require WWW::Scroogle::Result;
 
-our $VERSION = '0.010';
+our $VERSION = '0.011';
 
 sub new
 {
@@ -360,21 +360,21 @@ deletes all saved results
 
 returns list of WWW::Scroogle::Result objects. or a list of all wanted results if list was provided
 
-=head2 @results = $scroogle->get_results_matching($regexp|$string)
+=head2 @results = $scroogle->get_results_matching( qr{example.com} )
 
-returns list of results matching $string|$regexp
+returns a list of result-objects whose url is matching the given string or regexp
 
 =head2 $result = $scroogle->get_result($position)
 
 returns the requested result
 
-=head2 $position = $scroogle->position($string|$regexp)
+=head2 $position = $scroogle->position( qr{example.com} )
 
-returns the position of the first result matching $string|$regexp
+returns the position (counting from 1) of the first result whose url matches the given string or regexp
 
-=head2 @positions = $scroogle->positions($string|$regexp)
+=head2 @positions = $scroogle->positions( qr{example.com} )
 
-returns a list of the positions of all matching results.
+returns a list of the positions (counting from 1) of all results whose url's are matching the given string or regexp
 
 =head1 CAVEATS
 

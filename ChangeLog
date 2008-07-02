@@ -1,3 +1,11 @@
+2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
+	Version 0.011 Released.
+
+	* NEWS: Updated to 0.011
+
+	* lib/WWW/Scroogle.pm (POD): corrected a few obscurities - thanks moritz
+
+	* t/pod_coverage.t: fixed error - thanks tinita for uncovering it
 
 2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
 
