@@ -5,7 +5,7 @@ use strict;
 use warnings;
 use Carp;
 
-our $VERSION = '0.002';
+our $VERSION = '0.003';
 
 sub new
 {
@@ -108,5 +108,20 @@ returns the searchstring used in WWW::Scroogle while performing the search
 =head2 $result->language
 
 returns the language used in WWW::Scroogle while performing the search
+
+=head1 CAVEATS
+
+This is just a alpha release so dont expect it to work properly.
+
+=head1 AUTHOR
+
+Written by Lars Hartmann, <lars (at) chaotika (dot) org>.
+
+=head1 COPYRIGHT AND LICENSE
+
+Copyright (C) 2008 by Lars Hartmann, All Rights Reserved.
+
+This library is free software; you can redistribute it and/or modify
+it under the same terms as Perl itself.
 
 =cut

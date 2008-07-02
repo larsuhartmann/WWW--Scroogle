@@ -8,7 +8,7 @@ use Carp;
 require LWP;
 require WWW::Scroogle::Result;
 
-our $VERSION = '0.006';
+our $VERSION = '0.010';
 
 sub new
 {
@@ -308,8 +308,6 @@ the returned html output.
 
 =head1 METHODS
 
-blablabla
-
 =head2 WWW::Scroogle->new
 
 Returns a new WWW::Scroogle object.
@@ -381,11 +379,10 @@ returns a list of the positions of all matching results.
 =head1 CAVEATS
 
 This is just a alpha release so dont expect it to work properly
-ie there are no checks for null-strings and such things
 
 =head1 AUTHOR
 
-Written by Lars Hartmann, <lars at chaotika.org>.
+Written by Lars Hartmann, <lars (at) chaotika (dot) org>.
 
 =head1 COPYRIGHT AND LICENSE
 
