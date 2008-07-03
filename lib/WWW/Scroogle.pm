@@ -5,10 +5,10 @@ use strict;
 use warnings;
 use Carp;
 
-require LWP;
-require WWW::Scroogle::Result;
+use LWP;
+use WWW::Scroogle::Result;
 
-our $VERSION = '0.012';
+our $VERSION = '0.0131';
 
 sub new
 {
@@ -277,6 +277,16 @@ __END__
 
 WWW::Scroogle - Perl Extension for Scroogle
 
+=head1 CAVEAT
+
+Please note that using Scroogle.org - which this module is using (may) be a violation of Google's "Terms of Service", of which scroogle.org has been reminded. You can find the TOS at http://www.google.com/terms_of_service.html
+
+Scroogle.org does violate the "No Automated Query" section.
+
+The Author has searched for some easy way to get google results, he stumbled across the Google SOAP Api to which turned out to be useless because google will not give away keys to it anymore, later he found out about Googles Ajax api which turns out to be useless as you can only get the first 20results for a searchterm, now there was only one possibility left: parsing the html output of google webquerys; but while thinking about that the author realized scroogle.org, those guys have already done that job and do provide nice, clean html output which is much easier to parse than google.
+
+To come to an end: WWW::Scroogle does one job - it provides you with usable scroogle.org search results.
+
 =head1 SYNOPSIS
 
    use WWW::Scroogle;
@@ -375,10 +385,6 @@ returns the position (counting from 1) of the first result whose url matches the
 =head2 @positions = $scroogle->positions( qr{example.com} )
 
 returns a list of the positions (counting from 1) of all results whose url's are matching the given string or regexp
-
-=head1 CAVEATS
-
-This is just a alpha release so dont expect it to work properly
 
 =head1 AUTHOR
 

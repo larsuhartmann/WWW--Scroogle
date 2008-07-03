@@ -1,3 +1,16 @@
+2008-07-03  Lars Hartmann  <lars (at) chaotika (dot) org>
+	Version 0.013 Released
+	
+	* NEW: Updated to 0.0131
+
+	* lib/WWW/Scroogle.pm (POD-CAVEAT): added CAVEAT to inform the users about the legal status of scroogle.org - thanks moritz for pointing me to that
+
+2008-07-03  Lars Hartmann  <lars (at) chaotika (dot) org>
+
+	* lib/WWW/Scroogle.pm: bumped version to 0.0131
+
+	* lib/WWW/Scroogle.pm: changed require to use
+
 2008-07-02  Lars Hartmann  <lars (at) chaotika (dot) org>
 	Version 0.013 Released
 	
