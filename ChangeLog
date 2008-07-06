@@ -1,3 +1,7 @@
+2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+
+	* Makefile.PL: cleaned it up and added depends
+
 2008-07-03  Lars Hartmann  <lars (at) chaotika (dot) org>
 	Version 0.013 Released
 	
