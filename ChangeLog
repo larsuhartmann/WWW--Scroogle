@@ -1,4 +1,5 @@
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+	* Makefile.PL: added "use 5.008008" again
 
 	* Makefile.PL: cleaned it up and added depends
 
