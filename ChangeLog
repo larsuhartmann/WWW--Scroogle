@@ -1,4 +1,11 @@
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+	* Version 0.0134 Released
+
+	* NEW: Updated to 0.0134
+
+	* lib/WWW/Scroogle.pm: version bumped to 0.134
+
+2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
 	* Version 0.0133 Released
 	
 	* NEW: Updated to 0.0133

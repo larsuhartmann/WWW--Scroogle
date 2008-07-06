@@ -8,7 +8,7 @@ use Carp;
 use LWP;
 use WWW::Scroogle::Result;
 
-our $VERSION = '0.0133';
+our $VERSION = '0.0134';
 
 sub new
 {
