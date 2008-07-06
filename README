@@ -1,4 +1,4 @@
-WWW-Scroogle version 0.0132
+WWW-Scroogle version 0.0132_001
 =========================
 
 INSTALLATION
@@ -14,7 +14,7 @@ DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-   LWP-5.005
+   LWP-5.808
 
 COPYRIGHT AND LICENCE
 

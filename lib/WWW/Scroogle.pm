@@ -8,7 +8,7 @@ use Carp;
 use LWP;
 use WWW::Scroogle::Result;
 
-our $VERSION = '0.0131';
+our $VERSION = '0.0132_001';
 
 sub new
 {
@@ -385,6 +385,12 @@ returns the position (counting from 1) of the first result whose url matches the
 =head2 @positions = $scroogle->positions( qr{example.com} )
 
 returns a list of the positions (counting from 1) of all results whose url's are matching the given string or regexp
+
+=head1 CREDITS
+
+Tina Müller
+
+Moritz Lenz
 
 =head1 AUTHOR
 

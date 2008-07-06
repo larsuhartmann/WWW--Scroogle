@@ -1,4 +1,24 @@
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+
+	* NEW: Updated to 0.132_001
+
+	* NEW: Changed build System from MakeMaker to Module::Build
+
+	* MANIFEST: added META.yml and Build.PL
+
+	* Makefile.PL: displaced by a Module::Build generated version
+
+	* lib/WWW/Scroogle.pm (POD-CREDITS): section added
+
+	* Build.PL: added
+
+	* META.yml: added
+
+	* lib/WWW/Scroogle.pm: bumped version to 0.0132_001
+
+	* README: bumped version to 0.0132_001
+
+2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
 	* Makefile.PL: added "use 5.008008" again
 
 	* Makefile.PL: cleaned it up and added depends
