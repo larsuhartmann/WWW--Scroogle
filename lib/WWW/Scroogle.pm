@@ -8,7 +8,7 @@ use Carp;
 use LWP;
 use WWW::Scroogle::Result;
 
-our $VERSION = '0.0132_001';
+our $VERSION = '0.0133';
 
 sub new
 {
@@ -78,12 +78,17 @@ sub set_language
 
 sub languages
 {
-     my $either = shift;
-     my @languages = qw(
-                            all ar zs zt cs da nl en et fi fr de el iw
-                            hu is it ja ko lv lt no pt pl ro ru es sv tr
-                      );
-     return @languages;
+     ref(my $self = shift)
+          or croak 'instance variable needed!';
+     if (exists $self->{languages}) {             # does $self->{languages} exist?
+          return @ {$self->{languages}};          # return the array $self->{languages}
+     } else {                                     # if $self->{languages} does not exist, populate it
+          @ {$self->{languages}} = qw(
+                                          all ar zs zt cs da nl en et fi fr de el iw
+                                          hu is it ja ko lv lt no pt pl ro ru es sv tr
+                                    );
+          return @ {$self->{languages}};          # and return it
+     }
 }
 
 sub num_results
@@ -177,7 +182,6 @@ sub nresults
           return $nresults;
      }
      croak 'no results avaible';
-
 }
 
 sub get_results
@@ -228,13 +232,12 @@ sub position
      defined (my $string = shift)
           or croak 'no string given!';
      if (not $self->has_results) { croak 'no results avaible'; }
-     for (0..(@ {$self->{results}} - 1)) {
-          my $result = $self->{results}->[$_];
-          if ($result->url =~ /$string/) {
-               return $_ + 1;
+     for (@ {$self->{results}}) {                 # iterate over all avaible results
+          if ($_->url =~ /$string/) {             # does the url match the given pattern?
+               return $_->position                # return the position of the result
           }
      }
-     return;
+     return;                                      # return boolean false if no matches were found
 }
 
 sub positions
@@ -244,13 +247,13 @@ sub positions
      defined (my $string = shift)
           or croak 'no string given!';
      if (not $self->has_results) { croak 'no results avaible'; }
-     my @results = $self->get_results_matching($string);
+     my @results = $self->get_results_matching($string); # get array of result objects
      my @return;
-     for (@results) {
-          push @return, $_->position;
+     for (@results) {                             # iterate array of result objects
+          push @return, $_->position;             # push the position number of that array to @return
      }
-     if (scalar(@return) == 0) { return; }              # no matches found
-     return @return;
+     if (scalar(@return) == 0) { return; }        # return boolean false if no matches were found
+     return @return;                              # return the array of position numbers
 }
 
 sub get_results_matching
@@ -261,13 +264,13 @@ sub get_results_matching
           or croak 'no string given!';
      if (not $self->has_results) { croak 'no results avaible'; }
      my @return;
-     for (@ {$self->{results}}) {
-          if ($_->url =~ /$string/) {
-               push @return, $_;
+     for (@ {$self->{results}}) {                 # iterate over all avaible results
+          if ($_->url =~ /$string/) {             # does the url match the given pattern?
+               push @return, $_;                  # push the result object to @return
           }
      }
-     if (scalar(@return) == 0) { return; }              # no matches found
-     return @return;
+     if (scalar(@return) == 0) { return; }        # return boolean false if no matches were found
+     return @return;                              # return the array of result objects
 }
 1;
 

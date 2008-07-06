@@ -1,10 +1,25 @@
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+	* Version 0.0133 Released
+	
+	* NEW: Updated to 0.0133
+
+	* lib/WWW/Scroogle.pm: version bumped to 0.133
+
+	* lib/WWW/Scroogle.pm (position): simplified and commented function
+
+	* lib/WWW/Scroogle.pm (positions): commented function
+
+	* lib/WWW/Scroogle.pm (get_results_matching): commented function
+
+	* lib/WWW/Scroogle.pm (languages): introduced lazy methods and commented function
+
+2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
 
 	* Version 0.0132_001 Released
 
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
 
-	* NEW: Updated to 0.132_001
+	* NEW: Updated to 0.0132_001
 
 	* NEW: Changed build System from MakeMaker to Module::Build
 

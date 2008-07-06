@@ -1,6 +1,6 @@
 ---
 name: WWW-Scroogle
-version: 0.0132_001
+version: 0.233
 author:
   - Lars Hartmann
 abstract: Perl Extension for Scroogle
@@ -18,7 +18,7 @@ build_requires:
 provides:
   WWW::Scroogle:
     file: lib/WWW/Scroogle.pm
-    version: 0.0132_001
+    version: 0.133
   WWW::Scroogle::Result:
     file: lib/WWW/Scroogle/Result.pm
     version: 0.003
