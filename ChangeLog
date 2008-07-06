@@ -1,5 +1,9 @@
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
 
+	* Version 0.0132_001 Released
+
+2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+
 	* NEW: Updated to 0.132_001
 
 	* NEW: Changed build System from MakeMaker to Module::Build
