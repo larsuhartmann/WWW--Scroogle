@@ -1,4 +1,18 @@
+2008-07-07  Lars Hartmann  <lars (at) chaotika (dot) org>
+	* Version 0.0135 Released
+	
+	* NEW: Updated to 0.0135
+
+	* lib/WWW/Scroogle.pm: version bumped to 1.135
+
+	* lib/WWW/Scroogle/Result.pm:  version bumped to 0.004
+
+	* lib/WWW/Scroogle.pm: removed hard dependency on perl 5.8.8
+
+	* lib/WWW/Scroogle/Result.pm: same here
+
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+	
 	* Version 0.0134 Released
 
 	* NEW: Updated to 0.0134
@@ -6,6 +20,7 @@
 	* lib/WWW/Scroogle.pm: version bumped to 0.134
 
 2008-07-06  Lars Hartmann  <lars (at) chaotika (dot) org>
+	
 	* Version 0.0133 Released
 	
 	* NEW: Updated to 0.0133

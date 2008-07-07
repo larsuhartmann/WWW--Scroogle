@@ -1,6 +1,5 @@
 package WWW::Scroogle;
 
-use 5.008008;
 use strict;
 use warnings;
 use Carp;
@@ -8,7 +7,7 @@ use Carp;
 use LWP;
 use WWW::Scroogle::Result;
 
-our $VERSION = '0.0134';
+our $VERSION = '0.0135';
 
 sub new
 {
