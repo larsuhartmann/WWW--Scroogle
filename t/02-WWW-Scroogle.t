@@ -1,7 +1,7 @@
 #!/usr/bin/env perl
 
-# use Test::More tests => 23;
-use Test::More qw(no_plan);
+use Test::More tests => 120;
+# use Test::More qw(no_plan);
 
 # look if we can load it
 BEGIN { use_ok( 'WWW::Scroogle' ); }
@@ -30,6 +30,8 @@ is($scroogle->searchstring,$searchstring,'$object->searchstring eq "'.$searchstr
 # testing (default_|set_)language
 my $language = 'de';
 can_ok('WWW::Scroogle', $_) for qw(language set_language _default_language languages);
+eval{WWW::Scroogle->languages};
+ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->languages - fails (instance variable needed)');
 eval{WWW::Scroogle->language};
 ok($@ =~ m/instance variable needed/, 'WWW::Scroogle->language - fails (instance variable needed)');
 eval{WWW::Scroogle->set_language};

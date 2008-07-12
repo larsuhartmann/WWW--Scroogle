@@ -1,5 +1,10 @@
 2008-07-12  Lars Hartmann  <lars (at) chaotika (dot) org>
 
+	* t/02-WWW-Scroogle.t: added fixed plan
+	* t/02-WWW-Scroogle.t: added test for WWW::Scroogle->languages
+
+2008-07-12  Lars Hartmann  <lars (at) chaotika (dot) org>
+
 	* META.yml: regenerated
 
 	* Makefile.PL regenerated
