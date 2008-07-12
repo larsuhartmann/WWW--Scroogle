@@ -1,3 +1,13 @@
+2008-07-12  Lars Hartmann  <lars (at) chaotika (dot) org>
+
+	* META.yml: regenerated
+
+	* Makefile.PL regenerated
+
+2008-07-11  Lars Hartmann  <lars (at) chaotika (dot) org>
+
+	* Build.PL: quoted LWP dependency
+	
 2008-07-07  Lars Hartmann  <lars (at) chaotika (dot) org>
 	* Version 0.0135 Released
 	

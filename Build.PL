@@ -13,7 +13,7 @@ my $build = Module::Build->new(
                             'Carp'      => 0,
                             'strict'    => 0,
                             'warnings'  => 0,
-                            'LWP'       => 5.808,
+                            'LWP'       => '5.808',
                            },
      build_requires     => {
                             'Test::More'=> 0,

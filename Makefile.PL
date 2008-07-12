@@ -2,17 +2,17 @@
 use ExtUtils::MakeMaker;
 WriteMakefile
 (
-          'PL_FILES' => {},
-          'INSTALLDIRS' => 'site',
           'NAME' => 'WWW::Scroogle',
-          'EXE_FILES' => [],
           'VERSION_FROM' => 'lib/WWW/Scroogle.pm',
           'PREREQ_PM' => {
-                           'warnings' => 0,
-                           'strict' => 0,
-                           'Test::More' => 0,
+                           'Carp' => '0',
                            'LWP' => '5.808',
-                           'Carp' => 0
-                         }
+                           'Test::More' => '0',
+                           'strict' => '0',
+                           'warnings' => '0'
+                         },
+          'INSTALLDIRS' => 'site',
+          'EXE_FILES' => [],
+          'PL_FILES' => {}
         )
 ;
